@@ -1,0 +1,5 @@
+{
+  "mongoURI2": "mongodb+srv://sumit123:sumit123@devconnector-oatxf.mongodb.net/test?retryWrites=true&w=majority",
+  "mongoURI": "mongodb://127.0.0.1:27017/guestmap",
+  "jwtSecret": "mty"
+}
