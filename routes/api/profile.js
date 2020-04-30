@@ -218,10 +218,15 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
 
+    if (!profile) return res.status(404).json({ msg: 'Not found' });
+
     const experienceIndex = profile.experience
-      .map((exp) => exp.id)
+      .map((item) => item.id.toString())
       .indexOf(req.params.exp_id);
 
+    if (experienceIndex === -1)
+      return res.status(404).json({ msg: 'Not found' });
+    console.log(experienceIndex);
     profile.experience.splice(experienceIndex, 1);
     await profile.save();
     //console.log(experienceIndex);
@@ -295,9 +300,13 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
 
+    if (!profile) return res.status(404).json({ msg: 'Not availble' });
+
     const eduIndex = profile.education
-      .map((edu) => edu._id)
+      .map((item) => item._id.toString())
       .indexOf(req.params.edu_id);
+
+    if (eduIndex === -1) return res.status(404).json({ msg: 'Not found' });
 
     profile.education.splice(eduIndex, 1);
     await profile.save();
