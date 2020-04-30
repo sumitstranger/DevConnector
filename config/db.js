@@ -8,8 +8,9 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
+      useFindAndModify: false,
     });
-    //  mongoose.connection.db.dropDatabase();
+    //mongoose.connection.db.dropDatabase();
     console.log('MongoDB connected...');
   } catch (error) {
     console.error(error.message);
