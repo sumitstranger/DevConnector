@@ -1,6 +1,6 @@
 {
-  "mongoURI2": "mongodb+srv://sumit123:sumit123@devconnector-oatxf.mongodb.net/test?retryWrites=true&w=majority",
-  "mongoURI": "mongodb://127.0.0.1:27017/guestmap",
+  "mongoURI": "mongodb+srv://sumit123:sumit123@devconnector-oatxf.mongodb.net/test?retryWrites=true&w=majority",
+  "mongoURI2": "mongodb://127.0.0.1:27017/guestmap",
   "jwtSecret": "mty",
   "githubClientId": "4bd59e975d8055d106b5",
   "githubSecret": "a4658cfb4223e6e0c3c745fdd998a9b2b3be9824"
