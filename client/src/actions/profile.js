@@ -6,6 +6,8 @@ import {
   UPDATE_PROFILE,
   ACCOUNT_DELETED,
   CLEAR_PROFILE,
+  GET_ALL_PROFILES,
+  GET_REPOS,
 } from './types';
 import { setAlert } from './alert';
 
@@ -14,6 +16,70 @@ export const getCurrentProfile = () => async (dispatch) => {
     const res = await axios.get('/api/profile/me');
     dispatch({
       type: GET_PROFILE,
+      payload: res.data,
+    });
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//GetAllProfile
+export const getProfiles = () => async (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
+  try {
+    const res = await axios.get('/api/profile');
+    dispatch({
+      type: GET_ALL_PROFILES,
+      payload: res.data,
+    });
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Get Profile by userId
+export const getProfileByID = (userID) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/user/${userID}`);
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    });
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Get Github Repos
+export const getGithubRepos = (username) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/github/${username}`);
+    dispatch({
+      type: GET_REPOS,
       payload: res.data,
     });
   } catch (err) {
@@ -162,7 +228,7 @@ export const deleteEducation = (id) => async (dispatch) => {
 export const deleteAccount = () => async (dispatch) => {
   if (window.confirm('Are you sure?')) {
     try {
-      const res = await axios.delete('api/profile');
+      await axios.delete('api/profile');
 
       dispatch({
         type: CLEAR_PROFILE,
