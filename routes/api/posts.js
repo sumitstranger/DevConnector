@@ -233,7 +233,7 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
       .indexOf(req.params.comment_id);
 
     if (cmntIndex === -1)
-      return res.status(400).send({ msg: 'Comment not found' });
+      return res.status(400).json({ msg: 'Comment not found' });
 
     if (!post.comments[cmntIndex].user.toString() === req.user.id) {
       return res.status(401).json({ msg: 'Not authorize' });
