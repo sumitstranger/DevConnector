@@ -22,15 +22,13 @@ router.post(
     ).isLength({ min: 6 }),
   ],
   async (req, res) => {
-    console.log('-------USed------');
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log('-------USed------', req.body);
       return res.status(400).json({ errors: errors.array() });
     }
 
     const { name, email, password } = req.body;
-    console.log('-------USed------3');
+
     try {
       //check if user is already exist
       let user = await User.findOne({ email });
@@ -42,7 +40,7 @@ router.post(
       const avatar = gravatar.url(email, {
         s: '200',
         r: 'pg',
-        d: 'mm',
+        d: '404',
       });
 
       user = new User({
