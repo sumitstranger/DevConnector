@@ -5,11 +5,12 @@ import {
   UPDATE_LIKES,
   DELETE_POST,
   CREATE_POST,
+  GET_POST,
 } from './types';
 
 import { setAlert } from './alert';
 
-//Get post
+//Get posts
 
 export const getPosts = () => async (dispatch) => {
   try {
@@ -26,6 +27,22 @@ export const getPosts = () => async (dispatch) => {
   }
 };
 
+//Get post
+
+export const getPost = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/posts/${id}`);
+    dispatch({
+      type: GET_POST,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
 //Add likes
 
 export const addLike = (id) => async (dispatch) => {

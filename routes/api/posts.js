@@ -68,8 +68,8 @@ router.get('/:id', auth, async (req, res) => {
 
     if (!post) return res.status(404).json({ msg: 'c Post not found' });
 
-    if (post.user.toString() !== req.user.id)
-      return res.status(401).json({ msg: 'not authorized' });
+    // if (post.user.toString() !== req.user.id)
+    //   return res.status(401).json({ msg: 'not authorized' });
 
     res.json(post);
   } catch (err) {
