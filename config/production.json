@@ -1,5 +1,5 @@
 {
-  "mongoURI": "mongodb+srv://sumit123:sumit123@devconnector-oatxf.mongodb.net/test?retryWrites=true&w=majority",
+  "mongoURI": "mongodb+srv://sumit123:sumit123@devconnector.oatxf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   "jwtSecret": "mty",
   "githubClientId": "4bd59e975d8055d106b5",
   "githubSecret": "a4658cfb4223e6e0c3c745fdd998a9b2b3be9824"
